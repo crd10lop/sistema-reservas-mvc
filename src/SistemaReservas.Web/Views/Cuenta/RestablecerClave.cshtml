@@ -1,0 +1,24 @@
+@model SistemaReservas.Web.Models.ModeloRestablecerClave
+@{ ViewData["Title"] = "Restablecer Contraseña"; }
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<form asp-action="RestablecerClave" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input type="hidden" asp-for="Token" />
+    <input type="hidden" asp-for="Correo" />
+
+    <div class="mb-3">
+        <label asp-for="NuevaClave" class="form-label">Nueva Contraseña</label>
+        <input asp-for="NuevaClave" class="form-control" style="max-width: 300px;" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="ConfirmarClave" class="form-label">Confirmar Contraseña</label>
+        <input asp-for="ConfirmarClave" class="form-control" style="max-width: 300px;" />
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar Contraseña</button>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

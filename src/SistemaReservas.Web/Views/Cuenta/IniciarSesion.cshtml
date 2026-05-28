@@ -1,0 +1,34 @@
+@model SistemaReservas.Web.Models.ModeloLogin
+@{ ViewData["Title"] = "Ingreso al Sistema"; }
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="IniciarSesion" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Correo" class="form-label">Correo</label>
+                <input asp-for="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Clave" class="form-label">Contraseña</label>
+                <input asp-for="Clave" class="form-control" />
+                <span asp-validation-for="Clave" class="text-danger"></span>
+            </div>
+            <div class="mb-3 form-check">
+                <input asp-for="Recordarme" class="form-check-input" />
+                <label asp-for="Recordarme" class="form-check-label">Recordarme</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Ingresar</button>
+            <a asp-action="OlvidoClave" class="btn btn-link">¿Olvidó su clave?</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

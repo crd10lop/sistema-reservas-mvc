@@ -1,0 +1,17 @@
+@model SistemaReservas.Web.Models.ModeloRecuperarClave
+@{ ViewData["Title"] = "Recuperar Contraseña"; }
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<form asp-action="OlvidoClave" method="post">
+    <div class="mb-3">
+        <label asp-for="Correo" class="form-label">Correo</label>
+        <input asp-for="Correo" class="form-control" style="max-width: 300px;" />
+        <span asp-validation-for="Correo" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar Enlace</button>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

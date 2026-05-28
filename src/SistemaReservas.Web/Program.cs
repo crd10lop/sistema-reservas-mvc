@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SistemaReservas.Core.Interfaces;
 using SistemaReservas.Data.Context;
 using SistemaReservas.Data.Identity;
+using SistemaReservas.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 .AddDefaultTokenProviders();
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IServicioEmail, ServicioEmail>();
 
 var app = builder.Build();
 

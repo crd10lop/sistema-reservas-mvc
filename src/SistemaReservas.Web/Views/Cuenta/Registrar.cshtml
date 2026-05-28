@@ -1,0 +1,50 @@
+@model SistemaReservas.Web.Models.ModeloRegistro
+@{ ViewData["Title"] = "Registro Nuevo Usuario"; }
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Registrar" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Documento" class="form-label">Documento</label>
+                <input asp-for="Documento" class="form-control" />
+                <span asp-validation-for="Documento" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NombreCompleto" class="form-label">Nombre Completo</label>
+                <input asp-for="NombreCompleto" class="form-control" />
+                <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Correo" class="form-label">Correo</label>
+                <input asp-for="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Celular" class="form-label">Celular</label>
+                <input asp-for="Celular" class="form-control" />
+                <span asp-validation-for="Celular" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="FechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+                <input asp-for="FechaNacimiento" class="form-control" type="date" />
+                <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Clave" class="form-label">Contraseña</label>
+                <input asp-for="Clave" class="form-control" />
+                <span asp-validation-for="Clave" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Registrarse</button>
+            <a asp-action="IniciarSesion" class="btn btn-link">¿Ya tienes cuenta?</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
