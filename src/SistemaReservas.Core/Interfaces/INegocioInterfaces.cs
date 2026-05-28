@@ -19,4 +19,6 @@ public interface IServicioReservas
 {
     Task<IEnumerable<AlojamientoDisponibleDto>> BuscarAlojamientosDisponiblesAsync(int sedeId, DateTime fechaInicio, DateTime fechaFin, int numeroPersonas);
     Task<TotalReservaDto?> CotizarReservaAsync(int alojamientoId, int numeroPersonas, DateTime fechaInicio, DateTime fechaFin, bool incluyeLavanderia);
+    Task<bool> CrearReservaAsync(int alojamientoId, int sedeId, string usuarioId, DateTime fechaInicio, DateTime fechaFin, int numeroPersonas, bool incluyeLavanderia);
+    Task<IEnumerable<Reserva>> ObtenerMisReservasAsync(string usuarioId);
 }

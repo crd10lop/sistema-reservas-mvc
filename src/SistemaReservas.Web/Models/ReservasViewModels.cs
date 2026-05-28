@@ -33,3 +33,22 @@ public class ResultadosDisponibilidadViewModel
     public BuscarDisponibilidadViewModel ParametrosBusqueda { get; set; } = new();
     public IEnumerable<AlojamientoDisponibleDto> Alojamientos { get; set; } = new List<AlojamientoDisponibleDto>();
 }
+
+public class ConfirmarReservaViewModel
+{
+    public int AlojamientoId { get; set; }
+    public int SedeId { get; set; }
+    public DateTime FechaInicio { get; set; }
+    public DateTime FechaFin { get; set; }
+    public int NumeroPersonas { get; set; }
+    public bool IncluyeLavanderia { get; set; }
+
+    [Display(Name = "Costo Alojamiento")]
+    public decimal TotalAlojamiento { get; set; }
+
+    [Display(Name = "Costo Servicios")]
+    public decimal TotalServicios { get; set; }
+
+    [Display(Name = "Total a Pagar")]
+    public decimal TotalReserva { get; set; }
+}

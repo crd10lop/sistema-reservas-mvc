@@ -27,7 +27,13 @@ else
                             <li><strong>Capacidad Max:</strong> @alojamiento.CapacidadMaxima</li>
                             <li><strong>Tarifa Incluye:</strong> @alojamiento.CapacidadIncluida personas</li>
                         </ul>
-                        <button class="btn btn-outline-success w-100" disabled>Cotizar y Reservar (Fase 10)</button>
+                        <a asp-action="Confirmar"
+                           asp-route-alojamientoId="@alojamiento.Id"
+                           asp-route-sedeId="@Model.ParametrosBusqueda.SedeId"
+                           asp-route-fechaInicio="@Model.ParametrosBusqueda.FechaInicio.ToString("yyyy-MM-dd")"
+                           asp-route-fechaFin="@Model.ParametrosBusqueda.FechaFin.ToString("yyyy-MM-dd")"
+                           asp-route-numeroPersonas="@Model.ParametrosBusqueda.NumeroPersonas"
+                           class="btn btn-success w-100">Cotizar y Reservar</a>
                     </div>
                 </div>
             </div>

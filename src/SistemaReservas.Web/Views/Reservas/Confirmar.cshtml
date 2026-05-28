@@ -1,0 +1,56 @@
+@model SistemaReservas.Web.Models.ConfirmarReservaViewModel
+@{ ViewData["Title"] = "Confirmar Reserva"; }
+
+<h2>Resumen de su Reserva</h2>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-primary">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Detalles de la Cotización</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush mb-4">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span><strong>Fechas:</strong></span>
+                        <span>@Model.FechaInicio.ToShortDateString() - @Model.FechaFin.ToShortDateString()</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span><strong>Personas:</strong></span>
+                        <span>@Model.NumeroPersonas</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span><strong>Costo Alojamiento:</strong></span>
+                        <span>@Model.TotalAlojamiento.ToString("C0")</span>
+                    </li>
+                    @if (Model.TotalServicios > 0)
+                    {
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span><strong>Servicios:</strong></span>
+                            <span>@Model.TotalServicios.ToString("C0")</span>
+                        </li>
+                    }
+                    <li class="list-group-item d-flex justify-content-between bg-light">
+                        <span class="fs-5"><strong>TOTAL A PAGAR:</strong></span>
+                        <span class="fs-5 fw-bold text-success">@Model.TotalReserva.ToString("C0")</span>
+                    </li>
+                </ul>
+
+                <form asp-action="ProcesarReserva" method="post">
+                    <input type="hidden" asp-for="AlojamientoId" />
+                    <input type="hidden" asp-for="SedeId" />
+                    <input type="hidden" asp-for="FechaInicio" />
+                    <input type="hidden" asp-for="FechaFin" />
+                    <input type="hidden" asp-for="NumeroPersonas" />
+                    <input type="hidden" asp-for="IncluyeLavanderia" />
+                    <input type="hidden" asp-for="TotalAlojamiento" />
+                    <input type="hidden" asp-for="TotalServicios" />
+                    <input type="hidden" asp-for="TotalReserva" />
+
+                    <button type="submit" class="btn btn-success w-100 fs-5">Confirmar Reserva</button>
+                    <a asp-action="BuscarDisponibilidad" class="btn btn-outline-secondary w-100 mt-2">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
