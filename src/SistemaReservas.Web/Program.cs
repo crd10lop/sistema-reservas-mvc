@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SistemaReservas.Core.Interfaces;
 using SistemaReservas.Data.Context;
 using SistemaReservas.Data.Identity;
+using SistemaReservas.Data.Repositories;
 using SistemaReservas.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IServicioEmail, ServicioEmail>();
+builder.Services.AddScoped<ISedeRepository, SedeRepository>();
+builder.Services.AddScoped<IDisponibilidadRepository, DisponibilidadRepository>();
+builder.Services.AddScoped<IServicioReservas, ServicioReservas>();
 
 var app = builder.Build();
 
