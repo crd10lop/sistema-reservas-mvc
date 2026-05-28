@@ -1,0 +1,39 @@
+@model SistemaReservas.Web.Models.ResultadosDisponibilidadViewModel
+@{ ViewData["Title"] = "Resultados de Búsqueda"; }
+
+<h2>@ViewData["Title"]</h2>
+<p class="lead">Mostrando opciones para <strong>@Model.ParametrosBusqueda.NumeroPersonas</strong> personas del <strong>@Model.ParametrosBusqueda.FechaInicio.ToShortDateString()</strong> al <strong>@Model.ParametrosBusqueda.FechaFin.ToShortDateString()</strong>.</p>
+<hr />
+
+@if (!Model.Alojamientos.Any())
+{
+    <div class="alert alert-warning">No se encontraron alojamientos disponibles con los criterios seleccionados.</div>
+    <a asp-action="BuscarDisponibilidad" class="btn btn-secondary">Modificar Búsqueda</a>
+}
+else
+{
+    <div class="row">
+        @foreach (var alojamiento in Model.Alojamientos)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-success">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="card-title mb-0">@alojamiento.Nombre</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-3 text-muted">@alojamiento.NombreSede</h6>
+                        <p class="card-text small">@alojamiento.Caracteristicas</p>
+                        <ul class="list-unstyled">
+                            <li><strong>Capacidad Max:</strong> @alojamiento.CapacidadMaxima</li>
+                            <li><strong>Tarifa Incluye:</strong> @alojamiento.CapacidadIncluida personas</li>
+                        </ul>
+                        <button class="btn btn-outline-success w-100" disabled>Cotizar y Reservar (Fase 10)</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="mt-4">
+        <a asp-action="BuscarDisponibilidad" class="btn btn-secondary">Nueva Búsqueda</a>
+    </div>
+}

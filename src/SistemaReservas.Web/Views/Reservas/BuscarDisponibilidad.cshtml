@@ -1,0 +1,45 @@
+@model SistemaReservas.Web.Models.BuscarDisponibilidadViewModel
+@{ ViewData["Title"] = "Buscar Disponibilidad"; }
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="BuscarDisponibilidad" method="post" class="card p-4 shadow-sm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="SedeId" class="form-label fw-bold"></label>
+                <select asp-for="SedeId" class="form-select" asp-items="@(new SelectList(Model.SedesDisponibles, "Id", "Nombre"))">
+                    <option value="">-- Seleccione una Sede --</option>
+                </select>
+                <span asp-validation-for="SedeId" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="FechaInicio" class="form-label fw-bold"></label>
+                    <input asp-for="FechaInicio" class="form-control" />
+                    <span asp-validation-for="FechaInicio" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="FechaFin" class="form-label fw-bold"></label>
+                    <input asp-for="FechaFin" class="form-control" />
+                    <span asp-validation-for="FechaFin" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="NumeroPersonas" class="form-label fw-bold"></label>
+                <input asp-for="NumeroPersonas" class="form-control" type="number" min="1" max="20" />
+                <span asp-validation-for="NumeroPersonas" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Consultar Disponibilidad</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
