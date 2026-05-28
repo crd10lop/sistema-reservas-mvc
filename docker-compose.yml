@@ -1,28 +1,19 @@
+version: '3.8'
+
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sistema-reservas-db
     environment:
-      ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "${MSSQL_SA_PASSWORD}"
-      MSSQL_PID: "Developer"
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Reservas@2024#Xk9!
+      - MSSQL_PID=Developer
     ports:
       - "1433:1433"
     volumes:
-      - sistema-reservas-data:/var/opt/mssql
+      - sqlserver_data:/var/opt/mssql
     healthcheck:
-      test:
-        - CMD
-        - /opt/mssql-tools18/bin/sqlcmd
-        - -S
-        - localhost
-        - -U
-        - sa
-        - -P
-        - "${MSSQL_SA_PASSWORD}"
-        - -Q
-        - "SELECT 1"
-        - -C
+      test: ["CMD", "/opt/mssql-tools18/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "Reservas@2024#Xk9!", "-Q", "SELECT 1", "-C"]
       interval: 10s
       timeout: 5s
       retries: 6
@@ -31,8 +22,26 @@ services:
     networks:
       - sistema-reservas-network
 
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sistema-reservas-web
+    ports:
+      - "8080:8080"
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=SistemaReservas;User Id=sa;Password=Reservas@2024#Xk9!;TrustServerCertificate=True;MultipleActiveResultSets=true;
+    restart: unless-stopped
+    networks:
+      - sistema-reservas-network
+
 volumes:
-  sistema-reservas-data:
+  sqlserver_data:
 
 networks:
   sistema-reservas-network:
